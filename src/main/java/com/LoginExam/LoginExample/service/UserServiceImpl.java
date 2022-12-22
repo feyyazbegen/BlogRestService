@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(CreateUserRequest createUserRequest) {
         String encodedPassword = passwordEncoder.encode(createUserRequest.getPassword());
-        Role role = roleService.finRoleByName("USER");
+        Role role = roleService.findRoleByName("USER");
         User user = userConverter.convertToUser(createUserRequest, encodedPassword, role);
         return userRepository.save(user);
     }

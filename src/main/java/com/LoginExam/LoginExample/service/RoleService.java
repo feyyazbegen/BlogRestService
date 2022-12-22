@@ -5,5 +5,5 @@ import com.LoginExam.LoginExample.entity.Role;
 
 public interface RoleService {
 
-    Role finRoleByName(String name);
+    Role findRoleByName(String name);
 }
