@@ -5,14 +5,13 @@ import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.request.CreateUserRequest;
 import com.LoginExam.LoginExample.service.MainService;
 import com.LoginExam.LoginExample.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -57,4 +56,12 @@ public class MainController {
         }
         return "register";
     }
+    @RequestMapping("/detail")
+    public String secure(Map<String, Object> map) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        map.put("message", "Kullanıcı Detaylı bilgileri");
+        map.put("user", auth.getName());
+        return "detail";
+    }
+
 }
