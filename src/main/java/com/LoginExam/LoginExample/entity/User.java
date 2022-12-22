@@ -1,8 +1,11 @@
 package com.LoginExam.LoginExample.entity;
 
 import lombok.Data;
+import lombok.NonNull;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,12 +17,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    @Column(name="user_name")
+
+    @Column(name="user_name",nullable = false)
     private String userName;
+
+    @Column(name="password",nullable = false)
     private String password;
+
     @Column(nullable = false,columnDefinition = "TINYINT(1)")
     private boolean enabled;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
