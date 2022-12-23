@@ -29,4 +29,13 @@ public class UserServiceImpl implements UserService {
         User user = userConverter.convertToUser(createUserRequest, encodedPassword, role);
         return userRepository.save(user);
     }
+
+    @Override
+    public User findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
 }
+
+
+

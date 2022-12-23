@@ -5,4 +5,5 @@ import com.LoginExam.LoginExample.request.CreateUserRequest;
 
 public interface UserService {
     User createUser(CreateUserRequest createUserRequest);
+    User findByUserName(String userName);
 }

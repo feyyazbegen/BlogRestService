@@ -51,11 +51,17 @@ public class MainController {
         if (result.hasErrors()) {
             return "register";
         } else {
+            User byUserName = userService.findByUserName(user.getUserName());
+            if(byUserName != null){
+               model.addAttribute("error","Bu Kullanıcı Var");
+               return "register";
+            }
             userService.createUser(user);
             map.put("message", "Successful");
         }
         return "register";
     }
+
     @RequestMapping("/detail")
     public String secure(Map<String, Object> map) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -63,5 +69,7 @@ public class MainController {
         map.put("user", auth.getName());
         return "detail";
     }
+
+
 
 }
