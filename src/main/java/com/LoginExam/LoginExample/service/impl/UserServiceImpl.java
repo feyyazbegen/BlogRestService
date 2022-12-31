@@ -1,10 +1,12 @@
-package com.LoginExam.LoginExample.service;
+package com.LoginExam.LoginExample.service.impl;
 
 import com.LoginExam.LoginExample.converter.UserConverter;
 import com.LoginExam.LoginExample.entity.Role;
 import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.repository.UserRepository;
 import com.LoginExam.LoginExample.request.CreateUserRequest;
+import com.LoginExam.LoginExample.service.RoleService;
+import com.LoginExam.LoginExample.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

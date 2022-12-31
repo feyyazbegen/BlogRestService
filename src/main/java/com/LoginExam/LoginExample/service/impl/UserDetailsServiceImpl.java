@@ -1,4 +1,4 @@
-package com.LoginExam.LoginExample.service;
+package com.LoginExam.LoginExample.service.impl;
 
 import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.repository.UserRepository;

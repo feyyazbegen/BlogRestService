@@ -1,7 +1,8 @@
-package com.LoginExam.LoginExample.service;
+package com.LoginExam.LoginExample.service.impl;
 
 import com.LoginExam.LoginExample.entity.Role;
 import com.LoginExam.LoginExample.repository.RoleRepository;
+import com.LoginExam.LoginExample.service.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service
