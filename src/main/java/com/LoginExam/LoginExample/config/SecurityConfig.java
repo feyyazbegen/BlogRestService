@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().disable().exceptionHandling().authenticationEntryPoint(handler)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/auth/login/**")
+                .antMatchers("/auth/**")
                 .permitAll().antMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated();
 

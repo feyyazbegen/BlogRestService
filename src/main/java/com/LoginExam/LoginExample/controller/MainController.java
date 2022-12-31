@@ -3,7 +3,6 @@ package com.LoginExam.LoginExample.controller;
 import com.LoginExam.LoginExample.converter.UserConverter;
 import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.request.CreateUserRequest;
-import com.LoginExam.LoginExample.service.MainService;
 import com.LoginExam.LoginExample.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,13 +17,11 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-    private final MainService mainService;
     private final UserConverter userConverter;
     private final BCryptPasswordEncoder passwordEncoder; // ?
     private final UserService userService;
 
-    public MainController(MainService mainService, UserConverter userConverter, BCryptPasswordEncoder passwordEncoder, UserService userService) {
-        this.mainService = mainService;
+    public MainController( UserConverter userConverter, BCryptPasswordEncoder passwordEncoder, UserService userService) {
         this.userConverter = userConverter;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
