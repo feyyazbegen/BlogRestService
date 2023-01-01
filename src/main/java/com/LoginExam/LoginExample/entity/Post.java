@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,5 +25,10 @@ public class Post {
     private boolean isApproved;
     private boolean isDeleted;
 
+    @OneToMany(mappedBy = "post" )
+    private Set<Comment> comment;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 }
