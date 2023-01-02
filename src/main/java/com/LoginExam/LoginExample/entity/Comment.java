@@ -1,6 +1,5 @@
 package com.LoginExam.LoginExample.entity;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -25,9 +24,13 @@ public class Comment {
     @Column(columnDefinition="text")
     private String text;
 
-    private Date created_at;
-    private Date updated_at;
+    @Temporal(TemporalType.DATE)
+    private Date createdAt;
+    @Temporal(TemporalType.DATE)
+    private Date updatedAt;
 
+    @Column(columnDefinition = "TINYINT(1)")
     private boolean isApproved;
+    @Column(columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
 }

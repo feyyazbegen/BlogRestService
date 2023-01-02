@@ -1,7 +1,6 @@
 package com.LoginExam.LoginExample.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -19,10 +18,14 @@ public class Post {
     @Column(columnDefinition = "text")
     private String text;
 
-    private Date created_at;
-    private Date updated_at;
+    @Temporal(TemporalType.DATE)
+    private Date createdAt;
+    @Temporal(TemporalType.DATE)
+    private Date updatedAt;
 
+    @Column(nullable = false,columnDefinition = "TINYINT(1)")
     private boolean isApproved;
+    @Column(nullable = false,columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
 
     @OneToMany(mappedBy = "post" )
