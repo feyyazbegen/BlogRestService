@@ -2,6 +2,7 @@ package com.LoginExam.LoginExample.converter;
 import com.LoginExam.LoginExample.entity.Role;
 import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.request.CreateUserRequest;
+import com.LoginExam.LoginExample.response.UserResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -14,6 +15,13 @@ public class UserConverter {
         response.setPassword(encodedPassword);
         response.setEnabled(true);
         response.setRoles(Collections.singleton(role));
+        return response;
+    }
+
+    public UserResponse convertToUserResponse(User user){
+        UserResponse response = new UserResponse();
+        response.setUserId(user.getId());
+        response.setUserName(user.getUserName());
         return response;
     }
 

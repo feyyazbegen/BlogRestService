@@ -9,10 +9,6 @@ public class PostResponse {
     private Long id;
     private String title;
     private String text;
+    private UserResponse user;
 
-    public PostResponse(Post entity){
-        this.id= entity.getId();
-        this.title = entity.getTitle();
-        this.text = entity.getText();
-    }
 }

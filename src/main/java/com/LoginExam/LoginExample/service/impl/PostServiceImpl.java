@@ -32,15 +32,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post createOnePost(PostCreateRequest request) {
-        Optional<User> user = userService.getOneUserById(request.getUser_id());
+        Optional<User> user = userService.getOneUserById(request.getUserId());
         if (user == null){
             return null;
         }
         Post toSave = new Post();
-        toSave.setId(request.getId());
         toSave.setText(request.getText());
         toSave.setTitle(request.getTitle());
-        toSave.setCreated_at(new Date());
+        toSave.setCreatedAt(new Date());
         toSave.setUser(user.get());
         return postRepository.save(toSave);
     }

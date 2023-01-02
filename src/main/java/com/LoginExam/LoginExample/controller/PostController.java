@@ -26,8 +26,9 @@ public class PostController {
         return postService.getAllPosts().stream().map(postConverter::convertToPostResponse).toList();
     }
     @PostMapping("/")
-    public Post createOnePost(@RequestBody PostCreateRequest request){
-        return postService.createOnePost(request);
+    public PostResponse createOnePost(@RequestBody PostCreateRequest request){
+        Post onePost = postService.createOnePost(request);
+        return postConverter.convertToPostResponse(onePost);
     }
 
 }
