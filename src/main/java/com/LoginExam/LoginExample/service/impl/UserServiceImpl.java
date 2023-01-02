@@ -1,5 +1,4 @@
 package com.LoginExam.LoginExample.service.impl;
-
 import com.LoginExam.LoginExample.converter.UserConverter;
 import com.LoginExam.LoginExample.entity.Role;
 import com.LoginExam.LoginExample.entity.User;
@@ -9,6 +8,8 @@ import com.LoginExam.LoginExample.service.RoleService;
 import com.LoginExam.LoginExample.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public Optional<User> getOneUserById(Long user_id) {
+        return userRepository.findById(user_id);
     }
 
 }
