@@ -14,4 +14,5 @@ public interface PostService {
 
     PostResponse getPost(Long postId);
 
+    PostResponse updatePostById(Long postId, PostUpdateRequest request);
 }

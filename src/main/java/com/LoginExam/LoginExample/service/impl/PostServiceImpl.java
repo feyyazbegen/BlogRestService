@@ -4,6 +4,7 @@ import com.LoginExam.LoginExample.entity.Post;
 import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.repository.PostRepository;
 import com.LoginExam.LoginExample.request.PostCreateRequest;
+import com.LoginExam.LoginExample.request.PostUpdateRequest;
 import com.LoginExam.LoginExample.response.PostResponse;
 import com.LoginExam.LoginExample.service.PostService;
 import com.LoginExam.LoginExample.service.UserService;
@@ -53,5 +54,19 @@ public class PostServiceImpl implements PostService {
         PostResponse postResponse = postConverter.convertToPostResponse(post.get());
         return postResponse;
     }
+
+    @Override
+    public PostResponse updatePostById(Long postId, PostUpdateRequest request) {
+        Optional<Post> byId = postRepository.findById(postId);
+        if (!byId.isPresent()){
+            throw new RuntimeException("Post Bulunamadı");
+        }
+        Post post = byId.get();
+        post.setText(request.getText());
+        post.setTitle(request.getTitle());
+        postRepository.save(post);
+        return postConverter.convertToPostResponse(post);
+    }
+
 
 }

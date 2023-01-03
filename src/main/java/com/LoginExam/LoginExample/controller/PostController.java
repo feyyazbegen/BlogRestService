@@ -38,6 +38,10 @@ public class PostController {
         return postService.getPost(postId);
     }
 
+    @PutMapping("/{postId}")
+    public PostResponse updatePost(@PathVariable Long postId, @RequestBody PostUpdateRequest request) {
+        return postService.updatePostById(postId, request);
+    }
 
 
 }
