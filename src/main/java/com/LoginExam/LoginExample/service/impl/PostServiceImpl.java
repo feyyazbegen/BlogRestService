@@ -4,10 +4,10 @@ import com.LoginExam.LoginExample.entity.Post;
 import com.LoginExam.LoginExample.entity.User;
 import com.LoginExam.LoginExample.repository.PostRepository;
 import com.LoginExam.LoginExample.request.PostCreateRequest;
+import com.LoginExam.LoginExample.response.PostResponse;
 import com.LoginExam.LoginExample.service.PostService;
 import com.LoginExam.LoginExample.service.UserService;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +33,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post createOnePost(PostCreateRequest request) {
         Optional<User> user = userService.getOneUserById(request.getUserId());
-        if (user == null){
+        if (!user.isPresent()){
             return null;
         }
         Post toSave = new Post();
@@ -44,5 +44,14 @@ public class PostServiceImpl implements PostService {
         return postRepository.save(toSave);
     }
 
+    @Override
+    public PostResponse getPost(Long postId) {
+        Optional<Post> post = postRepository.findById(postId);
+        if(!post.isPresent()){
+            throw new RuntimeException("Post Bulunamadı");
+        }
+        PostResponse postResponse = postConverter.convertToPostResponse(post.get());
+        return postResponse;
+    }
 
 }

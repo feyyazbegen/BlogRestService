@@ -3,6 +3,7 @@ package com.LoginExam.LoginExample.controller;
 import com.LoginExam.LoginExample.converter.PostConverter;
 import com.LoginExam.LoginExample.entity.Post;
 import com.LoginExam.LoginExample.request.PostCreateRequest;
+import com.LoginExam.LoginExample.request.PostUpdateRequest;
 import com.LoginExam.LoginExample.response.PostResponse;
 import com.LoginExam.LoginExample.service.PostService;
 import org.springframework.web.bind.annotation.*;
@@ -25,10 +26,18 @@ public class PostController {
     public List<PostResponse> getAllPosts() {
         return postService.getAllPosts().stream().map(postConverter::convertToPostResponse).toList();
     }
+
     @PostMapping("/")
-    public PostResponse createOnePost(@RequestBody PostCreateRequest request){
+    public PostResponse createOnePost(@RequestBody PostCreateRequest request) {
         Post onePost = postService.createOnePost(request);
         return postConverter.convertToPostResponse(onePost);
     }
+
+    @GetMapping("/{postId}")
+    public PostResponse getPost(@PathVariable Long postId) {
+        return postService.getPost(postId);
+    }
+
+
 
 }
