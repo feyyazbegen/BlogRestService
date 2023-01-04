@@ -51,8 +51,7 @@ public class PostServiceImpl implements PostService {
         if(!post.isPresent()){
             throw new RuntimeException("Post Bulunamadı");
         }
-        PostResponse postResponse = postConverter.convertToPostResponse(post.get());
-        return postResponse;
+        return postConverter.convertToPostResponse(post.get());
     }
 
     @Override
@@ -66,6 +65,11 @@ public class PostServiceImpl implements PostService {
         post.setTitle(request.getTitle());
         postRepository.save(post);
         return postConverter.convertToPostResponse(post);
+    }
+
+    @Override
+    public void deletePost(Long postId) {
+        postRepository.deleteById(postId);
     }
 
 
