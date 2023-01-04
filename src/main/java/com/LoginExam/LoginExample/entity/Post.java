@@ -1,12 +1,17 @@
 package com.LoginExam.LoginExample.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Data
+@SQLDelete(sql = "UPDATE posts SET is_deleted = true WHERE post_id=?")
+@Where(clause = "is_deleted=false")
 @Table(name = "posts")
 public class Post {
     @Id
