@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post createOnePost(PostCreateRequest request) {
         Optional<User> user = userService.getOneUserById(request.getUserId());
-        if (!user.isPresent()){
+        if (!user.isPresent()) {
             return null;
         }
         Post toSave = new Post();
@@ -48,7 +48,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse getPost(Long postId) {
         Optional<Post> post = postRepository.findById(postId);
-        if(!post.isPresent()){
+        if (!post.isPresent()) {
             throw new RuntimeException("Post Bulunamadı");
         }
         return postConverter.convertToPostResponse(post.get());
@@ -57,7 +57,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse updatePostById(Long postId, PostUpdateRequest request) {
         Optional<Post> byId = postRepository.findById(postId);
-        if (!byId.isPresent()){
+        if (!byId.isPresent()) {
             throw new RuntimeException("Post Bulunamadı");
         }
         Post post = byId.get();
@@ -70,6 +70,18 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
+    }
+
+    @Override
+    public PostResponse approvePost(Long postId) {
+        Optional<Post> optionalPost = postRepository.findByIdAndApproved(postId,false);
+        if (!optionalPost.isPresent()) {
+            throw new RuntimeException("Post Bulunamadı");
+        }
+        Post post = optionalPost.get();
+        post.setApproved(true);
+        postRepository.save(post);
+        return postConverter.convertToPostResponse(post);
     }
 
 

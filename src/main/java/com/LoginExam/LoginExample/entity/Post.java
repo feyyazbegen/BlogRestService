@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Data
 @SQLDelete(sql = "UPDATE posts SET is_deleted = true WHERE post_id=?")
-@Where(clause = "is_deleted=false")
+@Where(clause = "is_deleted=false and is_approved = true")
 @Table(name = "posts")
 public class Post {
     @Id
