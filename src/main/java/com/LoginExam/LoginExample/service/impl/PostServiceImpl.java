@@ -84,5 +84,17 @@ public class PostServiceImpl implements PostService {
         return postConverter.convertToPostResponse(post);
     }
 
+    @Override
+    public PostResponse unApprovePost(Long postId) {
+        Optional<Post> optionalPost = postRepository.findByIdAndApproved(postId,true);
+        if (!optionalPost.isPresent()) {
+            throw new RuntimeException("Post Bulunamadı");
+        }
+        Post post = optionalPost.get();
+        post.setApproved(false);
+        postRepository.save(post);
+        return postConverter.convertToPostResponse(post);
+    }
+
 
 }

@@ -19,4 +19,6 @@ public interface PostService {
     void deletePost(Long postId);
 
     PostResponse approvePost(Long postId);
+
+    PostResponse unApprovePost(Long postId);
 }

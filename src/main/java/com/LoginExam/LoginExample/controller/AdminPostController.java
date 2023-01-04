@@ -17,6 +17,11 @@ public class AdminPostController {
     public PostResponse approvePost(@PathVariable Long postId){
        return postService.approvePost(postId);
     }
+    @PutMapping("/{postId}/unApprove")
+    public PostResponse unApprovePost(@PathVariable Long postId){
+        return postService.unApprovePost(postId);
+    }
+
     @DeleteMapping("/{postId}")
     public void deletePost(@PathVariable Long postId) {
         postService.deletePost(postId);
