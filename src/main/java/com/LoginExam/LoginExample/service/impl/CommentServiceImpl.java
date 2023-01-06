@@ -1,13 +1,9 @@
 package com.LoginExam.LoginExample.service.impl;
 
 import com.LoginExam.LoginExample.converter.CommentConverter;
-import com.LoginExam.LoginExample.converter.PostConverter;
 import com.LoginExam.LoginExample.entity.Comment;
-import com.LoginExam.LoginExample.entity.Post;
 import com.LoginExam.LoginExample.repository.CommentRepository;
-import com.LoginExam.LoginExample.repository.PostRepository;
 import com.LoginExam.LoginExample.request.CommentUpdateRequest;
-import com.LoginExam.LoginExample.request.PostUpdateRequest;
 import com.LoginExam.LoginExample.response.CommentResponse;
 import com.LoginExam.LoginExample.service.CommentService;
 import org.springframework.stereotype.Service;
@@ -49,6 +45,18 @@ public class CommentServiceImpl implements CommentService {
         byPostIdAndCommentId.setText(request.getText());
         commentRepository.save(byPostIdAndCommentId);
         return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
+    }
+
+    @Override
+    public CommentResponse approveComment(Long commentId) {
+        Optional<Comment> optionalComment = commentRepository.findByCommentIdAndApproved(commentId, false);
+        if (!optionalComment.isPresent()){
+            throw new RuntimeException("İlgili Yorum Bulunamadı");
+        }
+        Comment comment = optionalComment.get();
+        comment.setApproved(true);
+        commentRepository.save(comment);
+        return commentConverter.convertToCommentResponse(comment);
     }
 
 }
