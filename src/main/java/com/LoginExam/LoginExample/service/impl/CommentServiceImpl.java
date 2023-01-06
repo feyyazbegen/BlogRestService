@@ -19,15 +19,11 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
-    private final PostRepository postRepository;
     private final CommentConverter commentConverter;
-    private final PostConverter postConverter;
 
-    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, CommentConverter commentConverter, PostConverter postConverter) {
+    public CommentServiceImpl(CommentRepository commentRepository, CommentConverter commentConverter) {
         this.commentRepository = commentRepository;
-        this.postRepository = postRepository;
         this.commentConverter = commentConverter;
-        this.postConverter = postConverter;
     }
 
     @Override
@@ -37,5 +33,11 @@ public class CommentServiceImpl implements CommentService {
             throw new RuntimeException("İlgili Post bulunamadı");
         }
       return byPostId.stream().map(commentConverter::convertToCommentResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public CommentResponse getCommentsWithParam(Long postId, Long commentId) {
+        Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId);
+       return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
     }
 }
