@@ -24,7 +24,7 @@ public class CommentController {
         return commentService.getComments(postId);
     }
     @GetMapping("/{postId}/comment/{commentId}")
-    public CommentResponse getCommentsWithParam(@PathVariable Long postId,@PathVariable Long commentId){
-        return commentService.getCommentsWithParam(postId,commentId);
+    public CommentResponse getCommentsWithPostIdAndCommentId(@PathVariable Long postId,@PathVariable Long commentId){
+        return commentService.getCommentsWithPostIdAndCommentId(postId,commentId);
     }
 }

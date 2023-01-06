@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentResponse getCommentsWithParam(Long postId, Long commentId) {
+    public CommentResponse getCommentsWithPostIdAndCommentId(Long postId, Long commentId) {
         Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId);
        return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
     }
