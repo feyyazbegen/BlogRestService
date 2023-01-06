@@ -26,22 +26,22 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentResponse> getComments(Long postId) {
-        List<Comment> byPostId = commentRepository.findByPostId(postId);
+        List<Comment> byPostId = commentRepository.findByPostIdAndApprovedAndDeleted(postId,true,false);
         if(byPostId.isEmpty()){
-            throw new RuntimeException("İlgili Post bulunamadı");
+            throw new RuntimeException("İlgili Yorum bulunamadı");
         }
       return byPostId.stream().map(commentConverter::convertToCommentResponse).collect(Collectors.toList());
     }
 
     @Override
     public CommentResponse getCommentsWithPostIdAndCommentId(Long postId, Long commentId) {
-        Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId);
+        Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId,true,false);
        return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
     }
 
     @Override
     public CommentResponse updateWithPostIdAndCommentId(Long postId, Long commentId, CommentUpdateRequest request) {
-        Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId);
+        Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId,true,false);
         byPostIdAndCommentId.setText(request.getText());
         commentRepository.save(byPostIdAndCommentId);
         return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
@@ -69,6 +69,11 @@ public class CommentServiceImpl implements CommentService {
         comment.setApproved(false);
         commentRepository.save(comment);
         return commentConverter.convertToCommentResponse(comment);
+    }
+
+    @Override
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
     }
 
 }

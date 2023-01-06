@@ -2,10 +2,7 @@ package com.LoginExam.LoginExample.controller;
 
 import com.LoginExam.LoginExample.response.CommentResponse;
 import com.LoginExam.LoginExample.service.CommentService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/comments")
@@ -18,12 +15,17 @@ public class AdminCommentController {
     }
 
     @PutMapping("/{commentId}/approve")
-    public CommentResponse approvePost(@PathVariable Long commentId){
+    public CommentResponse approveComment(@PathVariable Long commentId){
         return commentService.approveComment(commentId);
     }
 
     @PutMapping("/{commentId}/unApprove")
-    public CommentResponse unApprovePost(@PathVariable Long commentId){
+    public CommentResponse unApproveComment(@PathVariable Long commentId){
         return commentService.unApproveComment(commentId);
+    }
+
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable Long commentId){
+        commentService.deleteComment(commentId);
     }
 }

@@ -17,4 +17,6 @@ public interface CommentService {
     CommentResponse approveComment(Long commentId);
 
     CommentResponse unApproveComment(Long commentId);
+
+    void deleteComment(Long commentId);
 }
