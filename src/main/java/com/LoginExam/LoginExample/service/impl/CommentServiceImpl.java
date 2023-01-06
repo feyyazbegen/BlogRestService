@@ -59,4 +59,16 @@ public class CommentServiceImpl implements CommentService {
         return commentConverter.convertToCommentResponse(comment);
     }
 
+    @Override
+    public CommentResponse unApproveComment(Long commentId) {
+        Optional<Comment> optionalComment = commentRepository.findByCommentIdAndApproved(commentId, true);
+        if (!optionalComment.isPresent()){
+            throw new RuntimeException("İlgili Yorum Bulunamadı");
+        }
+        Comment comment = optionalComment.get();
+        comment.setApproved(false);
+        commentRepository.save(comment);
+        return commentConverter.convertToCommentResponse(comment);
+    }
+
 }

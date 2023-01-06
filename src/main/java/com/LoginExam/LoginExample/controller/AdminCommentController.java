@@ -21,4 +21,9 @@ public class AdminCommentController {
     public CommentResponse approvePost(@PathVariable Long commentId){
         return commentService.approveComment(commentId);
     }
+
+    @PutMapping("/{commentId}/unApprove")
+    public CommentResponse unApprovePost(@PathVariable Long commentId){
+        return commentService.unApproveComment(commentId);
+    }
 }

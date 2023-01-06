@@ -15,4 +15,6 @@ public interface CommentService {
     CommentResponse updateWithPostIdAndCommentId(Long postId, Long commentId, CommentUpdateRequest request);
 
     CommentResponse approveComment(Long commentId);
+
+    CommentResponse unApproveComment(Long commentId);
 }
