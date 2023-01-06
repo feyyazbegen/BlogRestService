@@ -1,9 +1,11 @@
 package com.LoginExam.LoginExample.entity;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@SQLDelete(sql = "UPDATE comment SET is_deleted = true WHERE comment_id=?")
 @Table(name = "comment")
 @Data
 public class Comment {
