@@ -6,6 +6,8 @@ import com.LoginExam.LoginExample.entity.Comment;
 import com.LoginExam.LoginExample.entity.Post;
 import com.LoginExam.LoginExample.repository.CommentRepository;
 import com.LoginExam.LoginExample.repository.PostRepository;
+import com.LoginExam.LoginExample.request.CommentUpdateRequest;
+import com.LoginExam.LoginExample.request.PostUpdateRequest;
 import com.LoginExam.LoginExample.response.CommentResponse;
 import com.LoginExam.LoginExample.service.CommentService;
 import org.springframework.stereotype.Service;
@@ -40,4 +42,13 @@ public class CommentServiceImpl implements CommentService {
         Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId);
        return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
     }
+
+    @Override
+    public CommentResponse updateWithPostIdAndCommentId(Long postId, Long commentId, CommentUpdateRequest request) {
+        Comment byPostIdAndCommentId = commentRepository.findByPostIdAndCommentId(postId, commentId);
+        byPostIdAndCommentId.setText(request.getText());
+        commentRepository.save(byPostIdAndCommentId);
+        return commentConverter.convertToCommentResponse(byPostIdAndCommentId);
+    }
+
 }

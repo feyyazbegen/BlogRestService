@@ -1,10 +1,8 @@
 package com.LoginExam.LoginExample.controller;
+import com.LoginExam.LoginExample.request.CommentUpdateRequest;
 import com.LoginExam.LoginExample.response.CommentResponse;
 import com.LoginExam.LoginExample.service.CommentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +25,10 @@ public class CommentController {
     public CommentResponse getCommentsWithPostIdAndCommentId(@PathVariable Long postId,@PathVariable Long commentId){
         return commentService.getCommentsWithPostIdAndCommentId(postId,commentId);
     }
+
+    @PutMapping("/{postId}/comment/{commentId}")
+    public CommentResponse updateWithPostIdAndCommentId(@PathVariable Long postId, @PathVariable Long commentId, @RequestBody CommentUpdateRequest request){
+        return commentService.updateWithPostIdAndCommentId(postId,commentId,request);
+    }
+
 }
